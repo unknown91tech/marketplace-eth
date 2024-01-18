@@ -19,7 +19,7 @@
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      
+      "@content/*": ["content/*"]
 
     }
   },

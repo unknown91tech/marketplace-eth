@@ -9,7 +9,7 @@ interface CourseMap {
   [id: string]: Course & { index: number };
 }
 
-export const getAllCourse = (): { data: Course[]; courseMap: CourseMap } => {
+export const getAllCourses = (): { data: Course[]; courseMap: CourseMap } => {
   return {
     data: courses,
     courseMap: courses.reduce((a: CourseMap, c: Course, i: number) => {
