@@ -1,14 +1,35 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
-
-const inter = Inter({ subsets: ['latin'] })
+/* eslint-disable @next/next/no-img-element */
+import { Breadcrumbs, Footer, Hero, Navbar } from "@/components/common";
+import { EthRates, WalletBar } from "@/components/web3";
+import { CourseList } from "@components/course"
+import { OrderCard } from "@components/order"
 
 export default function Home() {
   return (
-    <>
-      Hello world
-    </>
+    <div>
+      <div className="relative bg-white overflow-hidden">
+        <div className="relative max-w-7xl mx-auto px-4">
+
+          <Navbar/>
+          <div className="fit">
+
+          <Hero />
+            <Breadcrumbs />
+            <WalletBar />
+            <EthRates />
+            <OrderCard />
+            <CourseList />
+
+            
+
+            
+
+            
+
+          </div>
+        </div>
+        <Footer/>
+      </div>
+    </div>
   )
 }
