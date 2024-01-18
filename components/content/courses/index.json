@@ -8,6 +8,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/next-js-typescript-with-shopify-integration-full-guide",
       "slug": "next-js-typescript-with-shopify-integration-full-guide",
+      "alt":"",
       "wsl": [
         "Build Next JS apps on your own",
         "Build ecommerce apps with modern technologies",
@@ -24,6 +25,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/gatsby-js-developer-s-guide-important-parts-blog-app",
       "slug": "gatsby-js-developer-s-guide-important-parts-blog-app",
+      "alt":"",
       "wsl": [
         "Build Gatsby JS apps on your own",
         "Build static page apps with modern technologies",
@@ -41,6 +43,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/the-complete-unity-guide-3d-beginner-to-rpg-game-dev-in-c",
       "slug": "the-complete-unity-guide-3d-beginner-to-rpg-game-dev-in-c",
+      "alt":"",
       "wsl": [
         "The practical approach by creating cool games",
         "Fundamentals and core concepts of game development",
@@ -58,6 +61,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/phaser-3-the-complete-guide-build-publish-games-in-js",
       "slug": "phaser-3-the-complete-guide-build-publish-games-in-js",
+      "alt":"",
       "wsl": [
         "Developing games by creating the games",
         "Fundamentals of game development",
@@ -75,6 +79,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/electron-react-js-build-native-chat-app-with-javascript",
       "slug": "electron-react-js-build-native-chat-app-with-javascript",
+      "alt":"",
       "wsl": [
         "Understand how Electron JS works",
         "Create a 'real-life' chat application",
@@ -92,6 +97,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/vue-3-react-angular-guide-to-popular-frameworks",
       "slug": "vue-3-react-angular-guide-to-popular-frameworks",
+      "alt":"",
       "wsl": [
         "Most popular web frameworks -> React, Angular & Vue JS",
         "Features explained on practical examples",
@@ -108,6 +114,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/vue-js-3-the-practical-guide",
       "slug": "vue-js-3-the-practical-guide",
+      "alt":"",
       "wsl": [
         "Features explained on practical examples",
         "Base and core concepts of Vue JS 3"
@@ -123,6 +130,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/complete-next-js-with-react-node-beautiful-portfolio-app",
       "slug": "complete-next-js-with-react-node-beautiful-portfolio-app",
+      "alt":"",
       "wsl": [
         "Develop serverless & classical web applications with the latest Next JS & React",
         "Understand web concepts clearly by creating real-world applications",
@@ -140,6 +148,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/react-angular-node-in-depth-guide-beginner-to-pro-2020",
       "slug": "react-angular-node-in-depth-guide-beginner-to-pro-2020",
+      "alt":"",
       "wsl": [
         "Develop Real-world web applications with React, Angular and Node",
         "Understand the processes and architecture of Angular, React and Node",
@@ -157,6 +166,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/react-js-firebase-complete-course-incl-chat-application",
       "slug": "react-js-firebase-complete-course-incl-chat-application",
+      "alt":"",
       "wsl": [
         "Develop real-world web application with React JS and Firebase",
         "Understand the processes and concepts of React JS 2",
@@ -173,6 +183,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/vue-js-2-firebase-complete-course",
       "slug": "vue-js-2-firebase-complete-course",
+      "alt":"",
       "wsl": [
         "Develop real-world web application with Vue JS 2 and Firebase",
         "Understand the processes and concepts of Vue JS 2",
@@ -189,6 +200,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/next-js-with-sanity-cms-serverless-blog-app-w-vercel",
       "slug": "next-js-with-sanity-cms-serverless-blog-app-w-vercel",
+      "alt":"",
       "wsl": [
         "Use the latest Next/React features (getStaticProps, getStaticPaths, getServerSideProps)",
         "Create statically generated web apps",
@@ -206,6 +218,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/next-js-and-apollo-portfolio-app-w-react-graphql-node",
       "slug": "next-js-and-apollo-portfolio-app-w-react-graphql-node",
+      "alt":"",
       "wsl": [
         "Develop Real-world web application with Next JS, Apollo and Node",
         "Create your own portfolio application in most demanded frameworks on the market",
@@ -222,6 +235,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/the-complete-vue-js-developer-course-inc-vue-js-2",
       "slug": "the-complete-vue-js-developer-course-inc-vue-js-2",
+      "alt":"",
       "wsl": [
         "Develop powerful, modern, real-world web applications with Vue JS 2 and Node",
         "Completely understand the processes and concepts of Vue JS 2",
@@ -239,6 +253,7 @@
       "author": "Filip Jerga",
       "link": "https://academy.eincode.com/courses/the-complete-nuxt-js-vue-js-course-self-promo-app",
       "slug": "the-complete-nuxt-js-vue-js-course-self-promo-app",
+      "alt":"",
       "wsl": [
         "Develop powerful, modern, real-world web applications with Nuxt JS, Vue JS 2 and Node",
         "Completely understand the processes and concepts of Nuxt JS & Vue JS 2",

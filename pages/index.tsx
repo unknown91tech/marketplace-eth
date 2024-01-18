@@ -11,8 +11,8 @@ export default function Home({courses}:any) {
     <BaseLayout>
 
         <Hero />
-        {JSON.stringify(courses)}
-        <CourseList />
+        
+        <CourseList courses={courses}/>
 
     </BaseLayout>
   )
