@@ -1,35 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { Breadcrumbs, Footer, Hero, Navbar } from "@/components/common";
+import { BaseLayout } from "@/components/layout";
 import { EthRates, WalletBar } from "@/components/web3";
 import { CourseList } from "@components/course"
 import { OrderCard } from "@components/order"
 
 export default function Home() {
   return (
-    <div>
-      <div className="relative bg-white overflow-hidden">
-        <div className="relative max-w-7xl mx-auto px-4">
+    <BaseLayout>
 
-          <Navbar/>
-          <div className="fit">
+        <Hero />
+        <Breadcrumbs />
+        <WalletBar />
+        <EthRates />
+        <OrderCard />
+        <CourseList />
 
-          <Hero />
-            <Breadcrumbs />
-            <WalletBar />
-            <EthRates />
-            <OrderCard />
-            <CourseList />
-
-            
-
-            
-
-            
-
-          </div>
-        </div>
-        <Footer/>
-      </div>
-    </div>
+    </BaseLayout>
   )
 }
