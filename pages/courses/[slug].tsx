@@ -13,8 +13,11 @@ export default function Course({course}:any) {
         
       <BaseLayout>
       <div className="py-4">
-      {course.title}
-        <CourseHero />
+        <CourseHero
+            title={course.title}
+            description={course.description}
+            image={course.coverImage}
+        />
       </div>
       <Keypoints />
       <Curriculum />
