@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-
+import Image from "next/legacy/image"
 
 export default function Hero({title,description,image}:any) {
 
@@ -44,9 +44,12 @@ export default function Hero({title,description,image}:any) {
             </div>
           </div>
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-            <img className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-4/5" 
+            <Image
+             className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-4/5" 
             src={image}
-            alt={title} />
+            alt={title} 
+            layout="fill"
+            />
           </div>
         </div>
       </section>

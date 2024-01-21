@@ -16,7 +16,11 @@ export default function Footer() {
               </div>
               <div>
                 <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Wishlish</Link>
-                <Link href="#" className="font-medium mr-8 text-indigo-600 hover:text-indigo-500">Log in</Link>
+                
+                <a href="#" className="rounded-md px-8 py-3 border text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 hover:transition-transform duration-200">
+                  Connect
+                </a>
+                
               </div>
             </div>
           </nav>
