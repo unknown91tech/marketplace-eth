@@ -1,11 +1,10 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 
-import { handler as createuseAccount} from "./useAccount";
+import { handler as createAccountHook } from "./useAccount";
+import { handler as createNetworkHook } from "./useNetwork";
 
-
-export const setupHooks= (web3:any, provider:any) => {
-    
-    return {
-        useAccount:createuseAccount(web3, provider)
-    }
+export const setupHooks = (...deps) => {
+  return {
+    useAccount: createAccountHook(...deps),
+    useNetwork: createNetworkHook(...deps)
+  }
 }
