@@ -43,7 +43,7 @@ export default function Marketplace({courses}:any) {
       <CourseList
         courses={courses}
       >
-      {(course: { id: any }) =>
+      {(course: any) =>
         <CourseCard
           key={course.id}
           course={course}

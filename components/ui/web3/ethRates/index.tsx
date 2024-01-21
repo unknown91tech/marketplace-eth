@@ -5,7 +5,7 @@ export default function EthRates({eth}:any) {
         <div className="flex flex-1 items-stretch text-center">
           <div className="p-10 border drop-shadow rounded-md">
             <div>
-              <span className="text-2xl font-bold">ETH = {eth}$</span>
+              <span className="text-2xl font-bold">ETH = ${eth}</span>
             </div>
             <p className="text-xl text-gray-500">Current eth Price</p>
           </div>
