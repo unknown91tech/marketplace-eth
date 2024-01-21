@@ -37,6 +37,7 @@ export default function Marketplace({courses}:any) {
         />
         <EthRates
           eth={eth.data}
+          ethPerItem={eth.perItem}
         />
         
       </div>
