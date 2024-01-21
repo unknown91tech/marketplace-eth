@@ -1,23 +1,22 @@
-/* eslint-disable @next/next/no-img-element */
-import { Breadcrumbs, Footer, Hero, Navbar } from "@/components/ui/common";
-import { BaseLayout } from "@/components/ui/layout";
-import { EthRates, WalletBar } from "@/components/ui/web3";
+
+import { Hero } from "@components/ui/common"
 import { CourseList } from "@components/ui/course"
-import { OrderCard } from "@components/ui/order"
-import { getAllCourses } from "@/components/ui/content/courses/fetcher";
+import { BaseLayout } from "@components/ui/layout"
+import { getAllCourses } from "@/components/ui/content/courses/fetcher"
+import { useWeb3 } from "@components/providers"
 
 export default function Home({courses}:any) {
+  const { web3 , isInitialized} = useWeb3()
   return (
-    <BaseLayout>
-
-        <Hero />
-        
-        <CourseList courses={courses}/>
-
-    </BaseLayout>
+    <>
+      { isInitialized ? "is init": "is not init" }
+      <Hero />
+      <CourseList
+        courses={courses}
+      />
+    </>
   )
 }
-
 export function getStaticProps() {
   const { data } = getAllCourses()
   return {
@@ -26,3 +25,4 @@ export function getStaticProps() {
     }
   }
 }
+Home.Layout = BaseLayout
