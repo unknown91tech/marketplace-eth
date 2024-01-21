@@ -7,9 +7,10 @@ import { useAccount } from "@/components/hooks/web3"
 import { useRouter } from "next/router"
 
 
+
 export default function Footer() {
 
-  const {connect, isWeb3Loaded , isLoading}:any = useWeb3()
+  const {connect, web3 , isLoading}:any = useWeb3()
 
   const {account} =useAccount()
   const {pathname}= useRouter()
@@ -34,7 +35,7 @@ export default function Footer() {
                     onClick={connect}>
                     Loading...
                   </Button>:
-                  isWeb3Loaded?
+                  web3!=null?
                     account.data?
                     <Button className="cursor-default " hoverable>
                       Hi there {account.isAdmin && "Admin" }
