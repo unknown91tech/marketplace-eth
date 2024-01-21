@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 
 import { CourseCard, CourseList } from "@components/ui/course"
 import { BaseLayout } from "@components/ui/layout"
@@ -21,6 +22,9 @@ export default function Marketplace({courses}:any) {
             address= {account.data}
             network={network.data}
         />
+        "Current" {`${network.data}`}
+        "Target" {`${network.target}`}
+        "Is Supported" {`${network.isSupported}`}
       </div>
       <CourseList
         courses={courses}
