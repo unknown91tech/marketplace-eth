@@ -1,6 +1,6 @@
 
 
-
+import Link from "next/link"
 
 export default function Footer() {
 
@@ -10,13 +10,13 @@ export default function Footer() {
           <nav className="relative" aria-label="Global">
             <div className="flex justify-between">
               <div>
-                <a href="#" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Product</a>
-                <a href="#" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Features</a>
-                <a href="#" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Marketplace</a>
+                <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Home</Link>
+                <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Marketplace</Link>
+                <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Blogs</Link>
               </div>
               <div>
-                <a href="#" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Company</a>
-                <a href="#" className="font-medium mr-8 text-indigo-600 hover:text-indigo-500">Log in</a>
+                <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Wishlish</Link>
+                <Link href="#" className="font-medium mr-8 text-indigo-600 hover:text-indigo-500">Log in</Link>
               </div>
             </div>
           </nav>

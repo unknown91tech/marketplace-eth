@@ -1,13 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { Key} from "react";
-import Image from "next/image"
+import Image from 'next/legacy/image'
+import Link from "next/link";
 
 
 export default function List({courses}:any) {
   return (
     <section className="grid md:grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
-      { courses.map((course: { id: Key | null ;
+      { courses.map((course: {
+        slug: any; id: Key | null ;
                                coverImage: string ; 
                               title: string; 
                               type: string | number ; 
@@ -31,11 +33,11 @@ export default function List({courses}:any) {
                 className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">
                 {course.type}
               </div>
-              <a
-                href="#"
-                className="block mt-1 text-lg leading-tight font-medium text-black hover:underline">
-                {course.title}
-              </a>
+              <Link href={`/courses/${course.slug}`} className="block mt-1 text-lg leading-tight font-medium text-black hover:underline" >
+                
+                  {course.title}
+                
+              </Link>
               <p
                 className="mt-2 text-gray-500">
                 {course.description}
