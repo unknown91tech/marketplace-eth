@@ -3,13 +3,13 @@
 import { useWeb3 } from "@/components/providers"
 import Link from "next/link"
 import { Button } from "@components/ui/common"
-import { useRouter } from "next/router"
+
 
 export default function Footer() {
 
   const {connect, isWeb3Loaded , isLoading} = useWeb3()
 
-  const router= useRouter()
+
 
     return (
       <section>
@@ -37,7 +37,7 @@ export default function Footer() {
                   </Button>
                   :
                   <Button 
-                    onClick={() => router.push("https://metamask.io/download/")}>
+                    onClick={() => window.open("https://metamask.io/download/", "_blank")}>
                     Install MetaMask
                   </Button>
 
