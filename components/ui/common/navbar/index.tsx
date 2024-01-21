@@ -3,7 +3,7 @@
 import { useWeb3 } from "@/components/providers"
 import Link from "next/link"
 import { Button } from "@components/ui/common"
-import { useAccount } from "@/components/web3/hooks/useAccount"
+import { useAccount } from "@/components/hooks/web3/useAccount"
 
 
 export default function Footer() {
@@ -20,7 +20,7 @@ export default function Footer() {
             <div className="flex justify-between items-center">
               <div>
                 <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Home</Link>
-                <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Marketplace</Link>
+                <Link href="/marketplace" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Marketplace</Link>
                 <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Blogs</Link>
               </div>
               <div>
