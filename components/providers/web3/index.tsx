@@ -38,6 +38,7 @@ export default function Web3Provider({children}:any){
   const _web3Api = useMemo(() => {
     return {
       ...web3Api,
+      isWeb3Loaded: !web3Api.isLoading && web3Api.web3,
       connect: web3Api.provider ?
         async () => {
           try {

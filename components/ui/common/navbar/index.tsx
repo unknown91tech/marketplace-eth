@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default function Footer() {
 
-  const {connect} = useWeb3()
+  const {connect, isWeb3Loaded} = useWeb3()
 
     return (
       <section>
@@ -19,12 +19,22 @@ export default function Footer() {
               </div>
               <div>
                 <Link href="/" className="font-medium mr-8 text-gray-500 hover:text-gray-900">Wishlish</Link>
+                {
+                  isWeb3Loaded ?
+                  <span 
+                    onClick={connect}
+                    className="rounded-md px-8 py-3 border text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 hover:transition-transform duration-200">
+                    Connect
+                  </span>
+                  :
+                  <span 
+                    onClick={connect}
+                    className="rounded-md px-8 py-3 border text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 hover:transition-transform duration-200">
+                    Install MetaMask
+                  </span>
+
+                }
                 
-                <button 
-                  onClick={connect}
-                className="rounded-md px-8 py-3 border text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 hover:transition-transform duration-200">
-                  Connect
-                </button>
                 
               </div>
             </div>
