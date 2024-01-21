@@ -3,6 +3,7 @@ import { useContext, useMemo } from "react";
 import detectEthereumProvider from "@metamask/detect-provider";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
+import { setupHooks } from "./hooks/setupHooks";
 const {createContext} = require("react");
 
 const Web3Context= createContext(null)
@@ -39,6 +40,7 @@ export default function Web3Provider({children}:any){
     return {
       ...web3Api,
       isWeb3Loaded:  web3Api.web3!= null,
+      hooks:setupHooks(web3Api.web3),
       connect: web3Api.provider ?
         async () => {
           try {

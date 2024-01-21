@@ -3,16 +3,19 @@
 import { useWeb3 } from "@/components/providers"
 import Link from "next/link"
 import { Button } from "@components/ui/common"
+import { useAccount } from "@/components/providers/web3/hooks/useAccount"
+
 
 
 export default function Footer() {
 
-  const {connect, isWeb3Loaded , isLoading} = useWeb3()
+  const {connect, isWeb3Loaded , isLoading, hooks}:any = useWeb3()
 
-
+  const {account} =hooks.useAccount()
 
     return (
       <section>
+        {account}
         <div className="relative pt-6 px-4 sm:px-6 lg:px-8">
           <nav className="relative" aria-label="Global">
             <div className="flex justify-between items-center">
