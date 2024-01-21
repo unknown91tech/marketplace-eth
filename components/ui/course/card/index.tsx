@@ -1,9 +1,9 @@
 
 
-import Image from "next/image"
+import Image from "next/legacy/image"
 import Link from "next/link"
 
-export default function Card({course}:any) {
+export default function Card({course, Footer}:any) {
   return (
     <div
       className="bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
@@ -14,7 +14,7 @@ export default function Card({course}:any) {
             src={course.coverImage}
             layout="fixed"
             width="200"
-            height="230"
+            height="281"
             alt={course.title}
           />
         </div>
@@ -30,6 +30,9 @@ export default function Card({course}:any) {
             className="mt-2 text-gray-500">
             {course.description}
           </p>
+          { Footer &&
+            <Footer />
+          }
         </div>
       </div>
     </div>
