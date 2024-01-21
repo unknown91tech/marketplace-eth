@@ -12,9 +12,12 @@ module.exports = {
     extend: {
       opacity:["disabled"],
       cursor:["disabled"],
-      
+      flex: {
+        "2": "2 2 0%"
+      },
     },
   },
+  
   plugins: [],
 }
 
