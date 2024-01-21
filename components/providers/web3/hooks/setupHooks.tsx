@@ -3,9 +3,9 @@
 import { handler as createuseAccount} from "./useAccount";
 
 
-export const setupHooks= (web3:any) => {
+export const setupHooks= (web3:any, provider:any) => {
     
     return {
-        useAccount:createuseAccount(web3)
+        useAccount:createuseAccount(web3, provider)
     }
 }
