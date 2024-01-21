@@ -8,9 +8,12 @@ import { useAccount } from "@/components/hooks/web3"
 import { useNetwork } from "@/components/hooks/web3"
 import { Button } from "@/components/ui/common"
 import { OrderModal } from "@/components/ui/order"
+import { useState } from "react"
 
 
 export default function Marketplace({courses}:any) {
+
+  const [selectedCourse , setSelectedCourse] = useState(null)
 
     const {account} = useAccount()
 
@@ -40,7 +43,9 @@ export default function Marketplace({courses}:any) {
           course={course}
           Footer={() =>
             <div className="mt-4">
-              <Button variant="lightPurple">
+              <Button variant="lightPurple " 
+                      onClick= {() => setSelectedCourse(course)}
+                      >
                 Purchase
               </Button>
             </div>
@@ -48,7 +53,9 @@ export default function Marketplace({courses}:any) {
         />
       }
       </CourseList>
-      <OrderModal />
+      { selectedCourse &&
+        <OrderModal course={selectedCourse} onClose= {()=> setSelectedCourse(null)} />
+      }
     </>
   )
 }

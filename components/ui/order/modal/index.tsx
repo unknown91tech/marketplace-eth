@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react"
 import { Button, Modal } from "../../common"
 
-export default function OrderModal() {
+export default function OrderModal({course, onClose}:any) {
+
+    const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    if (!!course) {
+      setIsOpen(true)
+    }
+  }, [course])
+
+  const closeModal = () => {
+    setIsOpen(false)
+    onClose()
+  }
 
     return(
         <Modal isOpen={true}>
@@ -9,7 +23,7 @@ export default function OrderModal() {
           <div className="sm:flex sm:items-start">
             <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 className="mb-7 text-lg font-bold leading-6 text-gray-900" id="modal-title">
-                Course Title
+                {course.title}
               </h3>
               <div className="mt-1 relative rounded-md">
                 <div className="mb-1">
@@ -75,6 +89,7 @@ export default function OrderModal() {
             Submit
           </Button>
           <Button
+          onClick={closeModal }
             variant="red">
             Cancel
           </Button>
