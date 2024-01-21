@@ -8,9 +8,9 @@ import { useRouter } from "next/router"
 
 
 
-export default function Footer() {
+export default function Navbar() {
 
-  const {connect, web3 , isLoading}:any = useWeb3()
+  const {connect, requireInstall , isLoading}:any = useWeb3()
 
   const {account} =useAccount()
   const {pathname}= useRouter()
@@ -35,20 +35,21 @@ export default function Footer() {
                     onClick={connect}>
                     Loading...
                   </Button>:
-                  web3!=null?
                     account.data?
                     <Button className="cursor-default " hoverable>
                       Hi there {account.isAdmin && "Admin" }
                     </Button>:
+                    requireInstall?
+                    <Button 
+                    onClick={() => window.open("https://metamask.io/download/", "_blank")}>
+                    Install MetaMask
+                  </Button> :
                       <Button 
                         onClick={connect}>
                         Connect
                       </Button>
-                  :
-                  <Button 
-                    onClick={() => window.open("https://metamask.io/download/", "_blank")}>
-                    Install MetaMask
-                  </Button>
+                  
+                  
 
                 }
                 
