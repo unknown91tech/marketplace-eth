@@ -17,7 +17,7 @@ const NETWORKS:any = {
 
   const targetNetwork = NETWORKS[process.env.NEXT_PUBLIC_TARGET_CHAIN_ID]
 export const handler = (web3:any , provider:any) => () => {
-    const {data,mutate, ...rest}=useSWR(() => 
+    const {data,error , mutate, ...rest}=useSWR(() => 
         web3? "web3/network": null,
         async() => {
             const chainId =await web3.eth.getChainId()
@@ -33,6 +33,7 @@ export const handler = (web3:any , provider:any) => () => {
     return {
         network:{
             mutate,
+            hasFinishedFirstFetch: data || error,
             data,
             target: targetNetwork,
             isSupported:data===targetNetwork,
