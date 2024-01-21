@@ -6,10 +6,10 @@ import { getAllCourses } from "@/components/ui/content/courses/fetcher"
 import { useWeb3 } from "@components/providers"
 
 export default function Home({courses}:any) {
-  const { web3 , isInitialized} = useWeb3()
+  const { web3 , isLoading} = useWeb3()
   return (
     <>
-      { isInitialized ? "is init": "is not init" }
+      { isLoading ? "is loading...": web3? "Web3 Ready" : "Please install metamask" }
       <Hero />
       <CourseList
         courses={courses}
