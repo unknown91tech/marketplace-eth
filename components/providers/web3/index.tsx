@@ -14,7 +14,8 @@ export default function Web3Provider({children}:any){
         provider: null,
         web3: null,
         contract: null,
-        isLoading: true
+        isLoading: true,
+        hooks:setupHooks()
       })
 
     useEffect(() => {
@@ -26,7 +27,8 @@ export default function Web3Provider({children}:any){
           provider,
           web3,
           contract: null,
-          isLoading: false
+          isLoading: false,
+          hooks:setupHooks(web3,provider)
         })
       } else {
         setWeb3Api(api => ({...api, isLoading: false}))
@@ -66,7 +68,7 @@ export function useWeb3() {
 }
 
 export function useHooks(cb:any){
-  const {getHooks}:any = useWeb3()
-  return cb(getHooks())
+  const {hooks}:any = useWeb3()
+  return cb(hooks)
 
 }
