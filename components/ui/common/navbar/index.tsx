@@ -3,15 +3,14 @@
 import { useWeb3 } from "@/components/providers"
 import Link from "next/link"
 import { Button } from "@components/ui/common"
-import { useAccount } from "@/components/providers/web3/hooks/useAccount"
-
+import { useAccount } from "@/components/web3/hooks/useAccount"
 
 
 export default function Footer() {
 
-  const {connect, isWeb3Loaded , isLoading, hooks}:any = useWeb3()
+  const {connect, isWeb3Loaded , isLoading}:any = useWeb3()
 
-  const {account} =hooks.useAccount()
+  const {account} =useAccount()
 
     return (
       <section>
