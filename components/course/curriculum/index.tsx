@@ -9,8 +9,9 @@ const lectures = [
     "Safe operator",
   ]
   
-  export default function Curriculum() {
-  
+  export default function Curriculum({locked}:any) {
+
+    const statusClass = "px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
     return (
       <section className="max-w-5xl mx-auto">
         <div className="flex flex-col">
@@ -35,6 +36,7 @@ const lectures = [
                     { lectures.map(lec =>
                       <tr key={lec}>
                         <td className="px-6 py-4 whitespace-nowrap">
+                          
                           <div className="flex items-center">
                             <div className="ml-4">
                               <div className="text-sm font-medium text-gray-900">
@@ -44,12 +46,20 @@ const lectures = [
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            Unlocked
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                          <a href="#" className="text-indigo-600 hover:text-indigo-900">Play</a>
+                        <span
+                          className={
+                            locked ?
+                             `bg-red-100 text-red-800 ${statusClass}` :
+                             `bg-green-100 text-green-800 ${statusClass}`
+                          }
+                        >
+                          { locked ? "Locked" : "Unlocked" }
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                          <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                            {locked ? "Get Access" : "Play"}
+                          </a>
                         </td>
                       </tr>
                     )}
