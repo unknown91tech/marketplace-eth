@@ -5,7 +5,7 @@ import { BaseLayout } from "@components/ui/layout"
 import { getAllCourses } from "@/components/ui/content/courses/fetcher"
 import { WalletBar, EthRates } from "@/components/ui/web3"
 import {  useWalletInfo } from "@/components/hooks/web3"
-import { Button } from "@/components/ui/common"
+import { Breadcrumbs, Button } from "@/components/ui/common"
 import { OrderModal } from "@/components/ui/order"
 import { useState } from "react"
 import { useEthPrice } from "@/components/hooks/web3/useEthPrice"
@@ -23,7 +23,7 @@ export default function Marketplace({courses}:any) {
   
   return (
     <>
-      <div className="py-4">
+      <div className="pt-4">
         
         <WalletBar
             address= {account.data}
@@ -38,6 +38,10 @@ export default function Marketplace({courses}:any) {
           eth={eth.data}
           ethPerItem={eth.perItem}
         />
+        <div className="py-4 px-4 sm:px-6 lg:px-8 flex flex-row-reverse">
+        <Breadcrumbs />
+        </div>
+        
         
       </div>
       <CourseList
