@@ -14,6 +14,7 @@ export default function OrderModal({course, onClose}:any) {
   const [isOpen, setIsOpen] = useState(false)
   const [order, setOrder] = useState(defaultOrder)
   const { eth } = useEthPrice()
+  const [enablePrice, setEnablePrice] = useState(false)
 
   useEffect(() => {
     if (!!course) {
@@ -46,6 +47,14 @@ export default function OrderModal({course, onClose}:any) {
                   <div className="text-xs text-gray-700 flex">
                     <label className="flex items-center mr-2">
                       <input
+                      checked={enablePrice}
+                      onChange={({target: {checked}}) => {
+                        setOrder({
+                          ...order,
+                          price: checked ? order.price : eth.perItem
+                        })
+                        setEnablePrice(checked)
+                      }}
                         type="checkbox"
                         className="form-checkbox"
                       />
@@ -54,6 +63,7 @@ export default function OrderModal({course, onClose}:any) {
                   </div>
                 </div>
                 <input
+                disabled={!enablePrice}
                   value={order.price}
                   onChange={({target: {value}}) => {
                     if (isNaN(value)) { return; }
@@ -102,7 +112,7 @@ export default function OrderModal({course, onClose}:any) {
                     type="checkbox"
                     className="form-checkbox" />
                 </label>
-                <span>I accept Eincode &apos;terms of service&apos; and I agree that my order can be rejected in the case data provided above are not correct</span>
+                <span>I accept Testcode &apos;terms of service&apos; and I agree that my order can be rejected in the case data provided above are not correct</span>
               </div>
             </div>
           </div>
