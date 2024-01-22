@@ -1,23 +1,38 @@
-import { useEffect, useState } from "react"
-import { Button, Modal } from "../../common"
+
+
+import { useEthPrice } from "@components/hooks/web3/useEthPrice";
+import { Modal, Button } from "@components/ui/common";
+import { useEffect, useState } from "react";
+
+const defaultOrder = {
+  price: "",
+  email: "",
+  confirmationEmail: ""
+}
 
 export default function OrderModal({course, onClose}:any) {
-
-    const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const [order, setOrder] = useState(defaultOrder)
+  const { eth } = useEthPrice()
 
   useEffect(() => {
     if (!!course) {
       setIsOpen(true)
+      setOrder({
+        ...defaultOrder,
+        price: eth.perItem
+      })
     }
-  }, [course])
+  }, [course, eth.perItem])
 
   const closeModal = () => {
     setIsOpen(false)
+    setOrder(defaultOrder)
     onClose()
   }
 
-    return(
-        <Modal isOpen={true}>
+  return (
+    <Modal isOpen={isOpen}>
       <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div className="sm:flex sm:items-start">
@@ -39,6 +54,14 @@ export default function OrderModal({course, onClose}:any) {
                   </div>
                 </div>
                 <input
+                  value={order.price}
+                  onChange={({target: {value}}) => {
+                    if (isNaN(value)) { return; }
+                    setOrder({
+                      ...order,
+                      price: value
+                    })
+                  }}
                   type="text"
                   name="price"
                   id="price"
@@ -57,7 +80,7 @@ export default function OrderModal({course, onClose}:any) {
                   name="email"
                   id="email"
                   className="w-80 focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-7 p-4 sm:text-sm border-gray-300 rounded-md"
-                  placeholder="examplemail123@y.com"
+                  placeholder="x@y.com"
                 />
                 <p className="text-xs text-gray-700 mt-1">
                 It&apos;s important to fill a correct email, otherwise the order cannot be verified. We are not storing your email anywhere
@@ -71,7 +94,7 @@ export default function OrderModal({course, onClose}:any) {
                   type="email"
                   name="confirmationEmail"
                   id="confirmationEmail"
-                  className="w-80 focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-7 p-4 sm:text-sm border-gray-300 rounded-md" placeholder="examplemail123@y.com" />
+                  className="w-80 focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-7 p-4 sm:text-sm border-gray-300 rounded-md" placeholder="x@y.com" />
               </div>
               <div className="text-xs text-gray-700 flex">
                 <label className="flex items-center mr-2">
@@ -89,7 +112,7 @@ export default function OrderModal({course, onClose}:any) {
             Submit
           </Button>
           <Button
-          onClick={closeModal }
+            onClick={closeModal}
             variant="red">
             Cancel
           </Button>
@@ -98,4 +121,3 @@ export default function OrderModal({course, onClose}:any) {
     </Modal>
   )
 }
- 

@@ -62,12 +62,12 @@ export default function OwnedCourseCard() {
                 </div>
               </div>
               <div className="mt-2">
-                <div className="mt-1 relative rounded-md w-72">
+                <div className="mt-1 relative rounded-md w-1/4">
                   <input
                     type="text"
                     name="price"
                     id="price"
-                    className="focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-7 p-4 sm:text-sm border-gray-300 rounded-md" placeholder="examplemail123@y.com" />
+                    className="focus:ring-indigo-500 shadow-md focus:border-indigo-500 block pl-4 p-4 sm:text-sm border-gray-300 rounded-md" placeholder="examplemail123@y.com" />
                   <div className="absolute inset-y-0 right-0 flex items-center">
                     <label htmlFor="currency" className="sr-only">Currency</label>
                     <div className="flex lg:justify-start">
