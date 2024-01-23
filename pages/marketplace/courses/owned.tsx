@@ -16,7 +16,7 @@ import { MarketHeader } from "@/components/ui/marketplace";
        </div>
         <section className="grid grid-cols-1">
         <OwnedCourseCard>
-          <Message>
+          <Message type="warning">
             My custom message!
           </Message>
           <Button>
