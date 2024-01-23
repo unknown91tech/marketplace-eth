@@ -23,6 +23,6 @@
 
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/courses/index.tsx", "pages/index.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/courses/index.tsx", "pages/index.tsx", "migrations/2_marketplace_migration.js"],
   "exclude": ["node_modules"]
 }
