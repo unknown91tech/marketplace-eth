@@ -19,7 +19,8 @@
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      "@content/*": ["content/*"]
+      "@content/*": ["content/*"],
+      "@utils/*": ["utils/*"]
 
     }
   },

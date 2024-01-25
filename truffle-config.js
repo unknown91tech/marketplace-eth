@@ -9,10 +9,9 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
+  contracts_build_directory: "./public/contracts",
 
   networks: {
-
-    contract_build_directory:"./public/contracts",
 
     development: {
      host: "127.0.0.1",     // Localhost (default: none)
@@ -21,7 +20,6 @@ module.exports = {
     },
     
   },
-
 
   compilers: {
     solc: {

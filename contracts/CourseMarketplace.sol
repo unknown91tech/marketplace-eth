@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
+
 contract CourseMarketplace {
   enum State {
     Purchased,
@@ -20,25 +21,22 @@ contract CourseMarketplace {
   mapping(uint => bytes32) private ownedCourseHash;
   // number of all courses + id of the course
   uint private totalOwnedCourses;
-
-  address payable private owner; 
-
+  address payable private owner;
+  constructor() {
+    setContractOwner(msg.sender);
+  }
   /// Course has already a Owner!
   error CourseHasOwner();
 
-    constructor() {
-    setContractOwner(msg.sender);
-    }
+  /// Only owner has an access!
+  error OnlyOwner();
 
-    ///Only Owner as an access!
-    error OnlyOwner;
-
-    modifier onlyOwner() {
-        if(msg.sender != getContractOwner()){
-            revert OnlyOwner();
-        }
-        _;
+  modifier onlyOwner() {
+    if (msg.sender != getContractOwner()) {
+      revert OnlyOwner();
     }
+    _;
+  }
 
   function purchaseCourse(
     bytes16 courseId, // 0x00000000000000000000000000003130
@@ -48,13 +46,10 @@ contract CourseMarketplace {
     payable
   {
     bytes32 courseHash = keccak256(abi.encodePacked(courseId, msg.sender));
-
     if (hasCourseOwnership(courseHash)) {
       revert CourseHasOwner();
     }
-
     uint id = totalOwnedCourses++;
-
     ownedCourseHash[id] = courseHash;
     ownedCourses[courseHash] = Course({
       id: id,
@@ -65,9 +60,12 @@ contract CourseMarketplace {
     });
   }
 
-    function transferOwnership (address newOwner) external  onlyOwner(){
-        setContractOwner(newOwner);
-    }
+  function transferOwnership(address newOwner)
+    external
+    onlyOwner
+  {
+    setContractOwner(newOwner);
+  }
 
   function getCourseCount()
     external
@@ -91,17 +89,19 @@ contract CourseMarketplace {
     return ownedCourses[courseHash];
   }
 
-  function getContractOwner() public view returns(address ){
+  function getContractOwner()
+    public
+    view
+    returns (address)
+  {
     return owner;
   }
 
   function setContractOwner(address newOwner) private {
-    owner=payable(newOwner);
-    owner.transfer(10);
-
+    owner = payable(newOwner);
   }
 
-  function hasCourseOwnership(bytes32 courseHash)
+    function hasCourseOwnership(bytes32 courseHash)
     private
     view
     returns (bool)
