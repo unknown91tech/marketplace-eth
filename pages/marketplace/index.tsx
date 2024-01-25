@@ -12,7 +12,7 @@ import { useWeb3 } from "@/components/providers"
 
 export default function Marketplace({courses}:any) {
 
-  const {web3} =useWeb3()
+  const {web3, contract} =useWeb3()
 
   const [selectedCourse , setSelectedCourse] = useState(null)
 
@@ -20,24 +20,36 @@ export default function Marketplace({courses}:any) {
 
 
 
-  const purchaseCourse = (order: any) => {
+  const purchaseCourse =async (order: any) => {
     const hexCourseId = web3.utils.utf8ToHex(selectedCourse.id)
-    console.log(hexCourseId)
 
     const orderHash = web3.utils.soliditySha3(
       {type:"bytes16" , value: hexCourseId},
       {type:"address" , value: account.data}
     )
-    console.log(orderHash)
 
     const emailHash = web3.utils.sha3(order.email)
 
-    console.log(emailHash)
     const proof = web3.utils.soliditySha3(
       {type: "bytes32" , value: emailHash},    
       {type: "bytes32" , value: orderHash}
     )
-    console.log(proof)
+
+    const value = web3.utils.toWei(String(order.price))
+    try{
+     const result= await contract.methods.purchaseCourse(
+        hexCourseId,
+        proof
+      ).send({from: account.data, value})
+
+      console.log( result)
+    }
+    catch{
+      console.log("Purchase Course: Opertaion falied!!")
+    }
+
+
+
     //courseHash + emailHash
   }
 
