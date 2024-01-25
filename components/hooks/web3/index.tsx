@@ -24,6 +24,13 @@ export const useAccount = () =>{
     }
 }
 
+export const useOwnedCourses = () => {
+    const res = useHooks((hooks:any) =>hooks.useOwnedCourses)()
+    return {
+        ownedCourses: {data: res}
+    }
+}
+
 export const useWalletInfo = () => {
     const {account} =useAccount()
     const {network} = useNetwork()
