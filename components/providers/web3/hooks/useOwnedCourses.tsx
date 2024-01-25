@@ -1,5 +1,20 @@
+import useSWR from "swr"
 
+export const handler = (web3: any, contract: any) => (courses: string | any[], account: any) => {
 
-export const handler = () => (web3: any, contract: any) => {
-    return "UseOwnedCourses is working"
-}   
+    const swrRes = useSWR(() =>
+      (web3 && contract && account) ? "web3/ownedCourses" : null,
+      async () => {
+        const ownedCourses = []
+  
+        for (let i = 0; i < courses.length; i++) {
+          const course = courses[i]
+          ownedCourses.push(course.id)
+        }
+  
+        return ownedCourses
+      }
+    )
+  
+    return swrRes
+  }

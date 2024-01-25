@@ -24,10 +24,10 @@ export const useAccount = () =>{
     }
 }
 
-export const useOwnedCourses = () => {
-    const res = useHooks((hooks:any) =>hooks.useOwnedCourses)()
+export const useOwnedCourses = (...args: any[]) => {
+    const swrRes = useHooks((hooks:any) =>hooks.useOwnedCourses)(...args)
     return {
-        ownedCourses: {data: res}
+        ownedCourses: swrRes
     }
 }
 
