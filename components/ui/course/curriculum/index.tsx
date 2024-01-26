@@ -1,5 +1,6 @@
 
 import Link from "next/link"
+import { Loader } from "../../common"
 
 const lectures = [
     "How to init App",
@@ -10,7 +11,7 @@ const lectures = [
     "Safe operator",
   ]
   
-  export default function Curriculum({locked , courseState}:any) {
+  export default function Curriculum({locked , courseState , isLoading}:any) {
 
     const statusClass = "px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
     return (
@@ -59,6 +60,8 @@ const lectures = [
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           {
+                            isLoading?
+                            <Loader />:
                             locked ?
                             <>
                               {
