@@ -1,14 +1,14 @@
 
 
-import Image from "next/legacy/image"
+import Image from "next/image"
 import Link from "next/link"
 
 export default function Card({course, Footer, disabled}:any) {
   return (
     <div
-      className="bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl">
-      <div className="flex h-full">
-        <div className="flex-1 h-full next-image-wrapper">
+      className="bg-white rounded-xl shadow-md overflow-hidden md:max-w-3xl">
+      <div className="block sm:flex md:block lg:flex">
+        <div className="flex-1 h-full sm:h-full  next-image-wrapper">
           <Image
             className={`object-cover ${disabled && "filter grayscale"}`}
             src={course.coverImage}

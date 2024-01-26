@@ -5,7 +5,7 @@ import { OwnedCourseCard } from "@/components/ui/course";
 import { BaseLayout } from "@/components/ui/layout";
 import { MarketHeader } from "@/components/ui/marketplace";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
  
 
  export default function OwnedCourses({courses}:any) {
@@ -18,7 +18,21 @@ import { useRouter } from "next/router";
         <>
         <MarketHeader/>
 
-        <section className="grid grid-cols-1">
+        <section className="grid grid-cols-1 max-h-max ">
+        { ownedCourses.hasInitialResponse && (
+          !ownedCourses.data || ownedCourses?.data.length === 0
+        ) &&
+          // <div className="w-1/2">
+            <Message type="warning">
+              <div>You don't own any courses</div>
+              <Link href="/marketplace" legacyBehavior>
+                <a className="font-normal hover:underline">
+                  <i>Purchase Course</i>
+                </a>
+              </Link>
+            </Message>
+          // </div>
+        }
           {ownedCourses.data?.map((course:any) => 
               <OwnedCourseCard 
                 key= {course.id}

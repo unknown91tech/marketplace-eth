@@ -10,7 +10,7 @@ export default function ManageCourses() {
     <>
       <MarketHeader />
       <CourseFilter />
-      <section className="grid grid-cols-1">
+      <section className="grid grid-cols-1 max-h-max">
         {/* <OwnedCourseCard>
           <div className="flex mr-2 relative rounded-md">
             <input
