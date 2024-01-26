@@ -6,8 +6,14 @@ import {
 } from "@components/ui/course";
 import { BaseLayout } from "@components/ui/layout";
 import { getAllCourses } from "@/components/ui/content/courses/fetcher";
+import { useAccount, useOwnedCourse } from "@/components/hooks/web3";
 
 export default function Course({course}:any) {
+
+  const { account } = useAccount()
+  const { ownedCourse } = useOwnedCourse(course, account.data)
+  console.log(ownedCourse)
+
   return (
     <>
       <div className="py-4">

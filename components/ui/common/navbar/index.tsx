@@ -67,14 +67,14 @@ export default function Navbar() {
           </div>
         </nav>
       </div>
-      { account.data &&
+      {/* { account.data &&
         !pathname.includes("/marketplace") &&
         <div className="flex justify-end pt-1 sm:px-6 lg:px-8">
           <div className="text-white bg-indigo-600 rounded-md p-2">
             {account.data}
           </div>
         </div>
-      }
+      } */}
     </section>
   )
 }
