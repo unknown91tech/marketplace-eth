@@ -21,14 +21,20 @@ import { MarketHeader } from "@/components/ui/marketplace";
          
        </div>
         <section className="grid grid-cols-1">
-        <OwnedCourseCard>
-          <Message type="success">
-            My custom message!
-          </Message>
-          <Button>
-            Watch the course
-          </Button>
-        </OwnedCourseCard>
+          {ownedCourses.data?.map((course:any) => 
+              <OwnedCourseCard 
+                key= {course.id}
+                course ={course}
+              >
+              <Message type="success">
+                My custom message!
+              </Message>
+              <Button>
+                Watch the course
+              </Button>
+            </OwnedCourseCard>
+          )}
+        
         </section>
         </>
     )
