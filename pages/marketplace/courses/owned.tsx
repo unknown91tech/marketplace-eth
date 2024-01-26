@@ -4,12 +4,13 @@ import { getAllCourses } from "@/components/ui/content/courses/fetcher";
 import { OwnedCourseCard } from "@/components/ui/course";
 import { BaseLayout } from "@/components/ui/layout";
 import { MarketHeader } from "@/components/ui/marketplace";
-
+import { useRouter } from "next/router";
 
  
 
  export default function OwnedCourses({courses}:any) {
 
+  const router = useRouter()
   const { account } = useAccount()
   const { ownedCourses } = useOwnedCourses(courses, account.data)
 
@@ -24,7 +25,9 @@ import { MarketHeader } from "@/components/ui/marketplace";
                 course ={course}
               >
               
-              <Button>
+              <Button
+              onClick={() => router.push(`/courses/${course.slug}`)}
+              >
                 Watch the course
               </Button>
             </OwnedCourseCard>
