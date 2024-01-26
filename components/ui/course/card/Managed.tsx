@@ -1,9 +1,9 @@
 
 
-const Item = ({title, value}:any) => {
+const Item = ({title, value, className}:any) => {
 
     return (
-      <div className="bg-gray-50 px-4 py-5  sm:px-6">
+      <div className={`${className} px-4 py-5 sm:px-6`}>
         <div className="text-sm font-medium text-gray-500">
           {title}
         </div>
@@ -20,14 +20,15 @@ const Item = ({title, value}:any) => {
     return (
       <div className="bg-white break-words border shadow overflow-hidden sm:rounded-lg mb-3">
         <div className="border-t border-gray-200">
+        { Object.keys(course).map((key, i) =>
           <Item
-            title="Course ID"
-            value={course.ownedCourseId}
+            key={key}
+            className={`${i % 2 ? "bg-gray-50" : "bg-white"}`}
+            // title={key}
+            title={key[0].toUpperCase() + key.slice(1)}
+            value={course[key]}
           />
-          <Item
-            title="Proof"
-            value={course.proof}
-          />
+        )}
           <div className="bg-white px-4 py-5 sm:px-6">
             {children}
           </div>
