@@ -23,7 +23,7 @@ const Item = ({title, value, className}:any) => {
         { Object.keys(course).map((key, i) =>
           <Item
             key={key}
-            className={`${i % 2 ? "bg-gray-50" : "bg-white"}`}
+            className={`${i % 2 ? "bg-gray-100" : "bg-white"}`}
             // title={key}
             title={key[0].toUpperCase() + key.slice(1)}
             value={course[key]}
