@@ -1,7 +1,8 @@
 
 
 import { useAccount, useManagedCourses } from "@components/hooks/web3";
-import { Button } from "@components/ui/common";
+import { useWeb3 } from "@components/providers";
+import { Button, Message } from "@components/ui/common";
 import { CourseFilter, ManagedCourseCard, OwnedCourseCard } from "@components/ui/course";
 import { BaseLayout } from "@components/ui/layout";
 import { MarketHeader } from "@components/ui/marketplace";
@@ -9,13 +10,25 @@ import { useState } from "react";
 
 export default function ManagedCourses() {
   const [ email, setEmail ] = useState("")
+  const [ proofedOwnership, setProofedOwnership ] = useState({})
+  const { web3 } = useWeb3()
   const { account } = useAccount()
   const { managedCourses } = useManagedCourses(account.data)
 
-  const verifyCourse = (email: string, {hash, proof}:any) => {
-    console.log(email)
-    console.log(hash)
-    console.log(proof)
+  const verifyCourse = (email: string, {hash, proof}: { hash: any; proof: any; }) => {
+    const emailHash = web3.utils.sha3(email)
+    const proofToCheck = web3.utils.soliditySha3(
+      { type: "bytes32", value: emailHash },
+      { type: "bytes32", value: hash }
+    )
+
+    proofToCheck === proof ?
+      setProofedOwnership({
+        [hash]: true
+      }) :
+      setProofedOwnership({
+        [hash]: false
+      })
   }
 
   return (
@@ -23,15 +36,15 @@ export default function ManagedCourses() {
       <MarketHeader />
       <CourseFilter />
       <section className="grid grid-cols-1">
-        { managedCourses.data?.map((course: { ownedCourseId: any; }) =>
+        { managedCourses.data?.map((course: { ownedCourseId: any; hash: string | number; proof: any; }) =>
           <ManagedCourseCard
             key={course.ownedCourseId}
             course={course}
           >
             <div className="flex mr-2 relative rounded-md">
               <input
-              value={email}
-              onChange={({target: {value}}) => setEmail(value)}
+                value={email}
+                onChange={({target: {value}}) => setEmail(value)}
                 type="text"
                 name="account"
                 id="account"
@@ -48,11 +61,24 @@ export default function ManagedCourses() {
                 Verify
               </Button>
             </div>
+            { proofedOwnership[course.hash] &&
+              <div className="mt-2">
+                <Message>
+                  Verified!
+                </Message>
+              </div>
+            }
+            { proofedOwnership[course.hash] === false &&
+              <div className="mt-2">
+                <Message type="danger">
+                  Wrong Proof!
+                </Message>
+              </div>
+            }
           </ManagedCourseCard>
         )}
       </section>
     </>
   )
 }
-
 ManagedCourses.Layout = BaseLayout
