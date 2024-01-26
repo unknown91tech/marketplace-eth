@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 
 export default function OwnedCourseCard({children,course}:any) {
@@ -14,6 +14,7 @@ export default function OwnedCourseCard({children,course}:any) {
               width="45"
               height="45"
               layout="responsive"
+              alt={course.title}
             />
           </div>
         </div>
