@@ -6,12 +6,14 @@ import { BaseLayout } from "@/components/ui/layout";
 import { MarketHeader } from "@/components/ui/marketplace";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useWeb3 } from "@/components/providers";
  
 
  export default function OwnedCourses({courses}:any) {
 
   const router = useRouter()
   const { account } = useAccount()
+  const { requireInstall } = useWeb3()
   const { ownedCourses } = useOwnedCourses(courses, account.data)
 
     return (
@@ -30,6 +32,20 @@ import Link from "next/link";
               </Link>
             </Message>
           // </div>
+        }
+        { account.isEmpty &&
+          //<div className="w-1/2">
+            <Message type="warning">
+              <div>Please connect to Metamask</div>
+            </Message>
+          //</div>
+        }
+        { requireInstall &&
+          //<div className="w-1/2">
+            <Message type="warning">
+              <div>Please install Metamask</div>
+            </Message>
+          //</div>
         }
           {ownedCourses.data?.map((course:any) => 
               <OwnedCourseCard 
