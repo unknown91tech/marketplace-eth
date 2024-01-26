@@ -15,7 +15,6 @@ import { MarketHeader } from "@/components/ui/marketplace";
 
     return (
         <>
-        {JSON.stringify(ownedCourses.data)}
         <div className="py-4">
         
         <MarketHeader/>

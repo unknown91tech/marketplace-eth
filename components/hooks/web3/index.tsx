@@ -25,7 +25,7 @@ export const useAccount = () =>{
 }
 
 export const useOwnedCourses = (...args: any[]) => {
-    const swrRes = useHooks((hooks:any) =>hooks.useOwnedCourses)(...args)
+    const swrRes = enhanceHook(useHooks((hooks:any) =>hooks.useOwnedCourses)(...args))
     return {
         ownedCourses: swrRes
     }
