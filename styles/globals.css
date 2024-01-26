@@ -5,12 +5,10 @@
 .fit{
     min-height: calc(100vh-88px);
 }
-.next-image-wrapper > * {
+.next-image-wrapper {
     height: 100%;
   }
 
-  
-  
   .sk-chase {
 
     position: relative;

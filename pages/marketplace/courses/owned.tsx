@@ -26,9 +26,7 @@ import { MarketHeader } from "@/components/ui/marketplace";
                 key= {course.id}
                 course ={course}
               >
-              <Message type="success">
-                My custom message!
-              </Message>
+              
               <Button>
                 Watch the course
               </Button>
