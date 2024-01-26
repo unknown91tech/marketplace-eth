@@ -15,11 +15,8 @@ import { MarketHeader } from "@/components/ui/marketplace";
 
     return (
         <>
-        <div className="py-4">
-        
         <MarketHeader/>
-         
-       </div>
+
         <section className="grid grid-cols-1">
           {ownedCourses.data?.map((course:any) => 
               <OwnedCourseCard 

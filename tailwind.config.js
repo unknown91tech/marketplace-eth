@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme")
 module.exports = {
   darkMode: 'className',
   content: [
@@ -10,6 +11,10 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      "xs": "475px",
+      ...defaultTheme.screens
+    },
     extend: {
       opacity:["disabled"],
       cursor:["disabled"],
