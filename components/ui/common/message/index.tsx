@@ -1,9 +1,9 @@
 import { useState } from "react"
 
 const TYPES:any = {
-    success: "green-100",
-    warning: "yellow-200",
-    danger: "red-100"
+    success: "green",
+    warning: "yellow",
+    danger: "red"
   }
 
 
@@ -19,11 +19,11 @@ export default function Message({children, type="success"}:any) {
     
 
     return ( 
-    <div className={`bg-${messageType} rounded-xl mb-3`}>
+    <div className={`bg-${messageType}-100 rounded-xl mb-3`}>
       <div className="max-w-7xl mx-auto py-3 px-3 sm:px-3 lg:px-3">
         <div className="flex items-center justify-between flex-wrap ">
           <div className="w-0 flex-1 flex items-center">
-            <p className={`ml-3 font-medium text-${messageType}-900 truncate`}>
+            <p className={`ml-3 font-medium text-${messageType}-900 `}>
               <span className="hidden md:inline">
                 { children }
               </span>
