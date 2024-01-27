@@ -1,4 +1,3 @@
-
 const CourseMarketplace = artifacts.require("CourseMarketplace")
 const { catchRevert } = require("./utils/exceptions")
 
@@ -24,6 +23,12 @@ contract("CourseMarketplace", accounts => {
         value
       })
     })
+    it("should NOT allow to repurchase already owned course", async () => {
+        await catchRevert(_contract.purchaseCourse(courseId, proof, {
+          from: buyer,
+          value
+        }))
+      })
     it("can get the purchased course hash by index", async () => {
       const index = 0
       courseHash = await _contract.getCourseHashAtIndex(index)
@@ -44,19 +49,48 @@ contract("CourseMarketplace", accounts => {
       assert.equal(course.state, exptectedState, `Course state should be ${exptectedState}!`)
     })
   })
-
   describe("Activate the purchased course", () => {
-
     it("should NOT be able to activate course by NOT contract owner", async () => {
       await catchRevert(_contract.activateCourse(courseHash, {from: buyer}))
     })
-
     it("should have 'activated' state", async () => {
       await _contract.activateCourse(courseHash, {from: contractOwner})
       const course = await _contract.getCourseByHash(courseHash)
       const exptectedState = 1
-
       assert.equal(course.state, exptectedState, "Course should have 'activated' state")
+    })
+  })
+
+
+  describe("Transfer ownership", () => {
+    let currentOwner = null
+
+    before(async() => {
+      currentOwner = await _contract.getContractOwner()
+    })
+
+    it("getContractOwner should return deployer address", async () => {
+      assert.equal(
+        contractOwner,
+        currentOwner,
+        "Contract owner is not matching the one from getContractOwner function"
+      )
+    })
+
+    it("should NOT transfer ownership when contract owner is not sending TX", async () => {
+      await catchRevert(_contract.transferOwnership(accounts[3], {from: accounts[4]}))
+    })
+
+    it("should transfer owership to 3rd address from 'accounts'", async () => {
+      await _contract.transferOwnership(accounts[2], {from: currentOwner})
+      const owner = await _contract.getContractOwner()
+      assert.equal(owner, accounts[2], "Contract owner is not the second account")
+    })
+
+    it("should transfer owership back to initial contract owner'", async () => {
+      await _contract.transferOwnership(contractOwner, {from: accounts[2]})
+      const owner = await _contract.getContractOwner()
+      assert.equal(owner, contractOwner, "Contract owner is not set!")
     })
   })
 })
