@@ -1,4 +1,7 @@
 import { useHooks } from "@/components/providers/web3";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useWeb3 } from "@components/providers"
 
 const _isEmpty = (data:any) => {
     return (
@@ -35,6 +38,20 @@ export const useAccount = () =>{
     return{
         account:swrRes
     }
+}
+
+export const useAdmin = ({redirectTo}:any) =>{
+    const {account} =useAccount()
+    const router = useRouter()
+    const {requireInstall} = useWeb3()
+    useEffect(() => {
+        
+        if((requireInstall || account.hasInitialResponse && !account.isAdmin) || account.isEmpty) {
+            router.push(redirectTo)
+        }
+    },[account])
+
+    return {account}
 }
 
 export const useOwnedCourses = (...args: any[]) => {
