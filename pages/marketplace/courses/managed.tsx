@@ -53,13 +53,22 @@ export default function ManagedCourses() {
       })
   }
 
-  const acitvateCourse =async (courseHash: any) => {
+  const changeCourseState =async (courseHash: any, method:any) => {
     try{
-      await contract.methods.activateCourse(courseHash).send({from: account.data})
+      await contract.methods[method](courseHash).send({from: account.data})
     }
     catch(e) {
       console.error(e.message)
     }
+  }
+
+
+  const activateCourse = async (courseHash: any) => {
+    changeCourseState(courseHash, "activateCourse")
+  }
+
+  const deactivateCourse = async (courseHash: string | number) => {
+    changeCourseState(courseHash, "deactivateCourse")
   }
 
   if (!account.isAdmin) {
@@ -100,11 +109,13 @@ export default function ManagedCourses() {
             { course.state === "purchased" &&
               <div>
               <Button 
-                onClick={()=> acitvateCourse(course.hash)}
+                onClick={()=> activateCourse(course.hash)}
               variant="green">
                 Activate
               </Button>
-              <Button variant="red">
+              <Button
+                  onClick={() => deactivateCourse(course.hash)}
+                  variant="red">
                 Deactivate
               </Button>
             </div>
