@@ -67,7 +67,7 @@ export default function Marketplace({courses}:any) {
           disabled={!canPurchaseCourse}
           Footer={() =>
             <div className="mt-4">
-              <Button variant="lightPurple " 
+              <Button variant="lightPurple" 
                       disabled={!canPurchaseCourse}
                       onClick= {() => setSelectedCourse(course)}
                       >

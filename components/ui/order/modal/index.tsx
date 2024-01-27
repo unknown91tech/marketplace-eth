@@ -165,6 +165,7 @@ export default function OrderModal({course, onClose, onSubmit}:any) {
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex">
           <Button
+          variant="green"
             disabled={formState.isDisabled}
             onClick={() => {
               onSubmit(order)
