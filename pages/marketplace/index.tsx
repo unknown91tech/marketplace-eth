@@ -77,6 +77,7 @@ export default function Marketplace({courses}:any) {
                     // <div className="mt-4">
                       <Button variant="lightPurple" 
                               disabled={true}
+                              size="sm"
                               >
                         Install
                       </Button>
@@ -89,6 +90,7 @@ export default function Marketplace({courses}:any) {
                     // <div className="mt-4">
                       <Button variant="lightPurple" 
                               disabled={true}
+                              size="sm"
                               >
                         <Loader size="sm"/>
                       </Button>
@@ -110,6 +112,7 @@ export default function Marketplace({courses}:any) {
                     <div>
                       <Button
                         disabled={true}
+                        size="sm"
                         variant="green">
                         Owned
                       </Button>
@@ -117,8 +120,9 @@ export default function Marketplace({courses}:any) {
                         owned.state ==="deactivated" &&
                         <Button
                         disabled={false}
+                        size="sm"
                         onClick={() => alert("Re-activating")}
-                        variant="purple">
+                        variant="blue">
                         Reactivate
                       </Button>
                       }
@@ -132,6 +136,7 @@ export default function Marketplace({courses}:any) {
                 // <div className="mt-4">
                   <Button variant="lightPurple" 
                           disabled={!hasConnectedWallet}
+                          size="sm"
                           onClick= {() => setSelectedCourse(course)}
                           >
                     Purchase
