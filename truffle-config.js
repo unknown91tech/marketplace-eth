@@ -1,4 +1,6 @@
 
+const HDWalletProvider = require("@truffle/hdwallet-provider")
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -18,6 +20,20 @@ module.exports = {
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
+    sepolia: {
+      provider: () =>
+        new HDWalletProvider({
+          mnemonic: {
+            phrase: ""
+          },
+          providerOrUrl: "wss://sepolia.infura.io/ws/v3/YOUR-PROJECT-ID",
+          addressIndex: 0
+        }),
+      network_id: "11155111",
+      gasPrice: 2500000000,
+      networkCheckoutTimeout: 10000,
+      timeoutBlocks: 200
+    }
     
   },
 
