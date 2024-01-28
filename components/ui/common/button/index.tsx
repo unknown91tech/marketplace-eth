@@ -18,11 +18,11 @@ export default function Button({
         const sizeClass = SIZE[size]
         const variants:any={
             white:`text-black bg-white ${hoverable &&" hover:transition-transform duration-200"}`,
-            purple:`text-white bg-indigo-600 ${hoverable &&"hover:bg-indigo-700 hover:transition-transform duration-200"}`,
-            green:`text-white bg-green-600 ${hoverable &&"hover:bg-green-700 hover:transition-transform duration-200"}`,
-            blue:`text-white bg-blue-600 ${hoverable &&"hover:bg-blue-700 hover:transition-transform duration-200"}`,
-            red: `text-white bg-red-600 ${hoverable &&"hover:bg-red-700 hover:transition-transform duration-200"}`,
-            lightPurple: `text-indigo-700 bg-indigo-100 ${hoverable &&"hover:bg-indigo-200 hover:transition-transform duration-200"}`
+            purple:`text-indigo-700 bg-indigo-100 ${hoverable &&"hover:bg-indigo-200 hover:transition-transform duration-200 border-0"}`,
+            green:`text-green-700 bg-green-100 ${hoverable &&"hover:bg-green-200 hover:transition-transform duration-200 border-0"}`,
+            blue:`text-blue-700 bg-blue-100 ${hoverable &&"hover:bg-blue-200 hover:transition-transform duration-200 border-0"}`,
+            red: `text-red-700 bg-red-100 ${hoverable &&"hover:bg-red-200 hover:transition-transform duration-200 border-0"}`,
+            lightPurple: `text-indigo-700 bg-indigo-100 ${hoverable &&"hover:bg-indigo-200 hover:transition-transform duration-200 border-0"}`
         }
     return (
         <button 

@@ -10,6 +10,7 @@ import { useState } from "react"
 import { MarketHeader } from "@/components/ui/marketplace"
 import { useWeb3 } from "@/components/providers"
 import {OwnedCourses} from "./courses/owned"
+import { redirect } from "next/dist/server/api-utils"
 
 export default function Marketplace({courses}:any) {
 
@@ -100,7 +101,7 @@ export default function Marketplace({courses}:any) {
 
                 if(!ownedCourses.hasInitialResponse){
                   return (
-                    <div style={{height: "50px"}}></div>
+                    <div style={{height: "42px"}}></div>
                   )
                 }
 
@@ -109,12 +110,12 @@ export default function Marketplace({courses}:any) {
                 if(owned) {
                   return (
                     <>
-                    <div>
+                    <div className="flex">
                       <Button
-                        disabled={true}
+                        
                         size="sm"
                         variant="green">
-                        Owned
+                        Owned <span > &#10003;</span> 
                       </Button>
                       {
                         owned.state ==="deactivated" &&
