@@ -27,6 +27,12 @@ export const handler = (web3: any, contract: any) => (courses: string | any[], a
       }
     )
   
-    return swrRes
+    return {
+      ...swrRes,
+      lookup:swrRes.data?.reduce((a,c) => {
+        a[c.id] =c;
+        return a
+      },{}) ?? {}
+    }
   }
 
