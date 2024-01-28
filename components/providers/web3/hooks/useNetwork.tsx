@@ -29,7 +29,7 @@ export const handler = (web3:any , provider:any) => () => {
     )
 
     useEffect(() => {
-    const mutator = (chainId: string) => mutate(NETWORKS[parseInt(chainId, 16)])
+    const mutator = (chainId: string) => window.location.reload()
     provider?.on("chainChanged", mutator)
 
     return () => {
