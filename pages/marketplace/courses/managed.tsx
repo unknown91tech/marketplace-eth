@@ -70,6 +70,14 @@ export default function ManagedCourses() {
   const deactivateCourse = async (courseHash: string | number) => {
     changeCourseState(courseHash, "deactivateCourse")
   }
+  
+  const searchCourse = (courseHash:any) => {
+    if (!courseHash) {
+      return
+    }
+
+    alert(courseHash)
+  }
 
   if (!account.isAdmin) {
     return null
@@ -77,7 +85,9 @@ export default function ManagedCourses() {
   return (
     <>
       <MarketHeader />
-      <CourseFilter />
+      <CourseFilter 
+        onSearchSubmit={searchCourse}
+      />
       <section className="grid grid-cols-1">
         { managedCourses.data?.map((course: { ownedCourseId: any; hash: string | number; proof: any; }) =>
           <ManagedCourseCard
