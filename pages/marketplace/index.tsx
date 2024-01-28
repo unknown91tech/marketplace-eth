@@ -9,8 +9,7 @@ import { OrderModal } from "@/components/ui/order"
 import { useState } from "react"
 import { MarketHeader } from "@/components/ui/marketplace"
 import { useWeb3 } from "@/components/providers"
-import {OwnedCourses} from "./courses/owned"
-import { redirect } from "next/dist/server/api-utils"
+
 
 export default function Marketplace({courses}:any) {
 
@@ -18,6 +17,7 @@ export default function Marketplace({courses}:any) {
   const [selectedCourse , setSelectedCourse] = useState(null)
   const {hasConnectedWallet, isConnecting , account}:any = useWalletInfo()
   const {ownedCourses} = useOwnedCourses(courses , account.data)
+  const [isNewPurchase, setIsNewPurchase] = useState(true)
 
 
   const purchaseCourse =async (order: any) => {
@@ -122,7 +122,10 @@ export default function Marketplace({courses}:any) {
                         <Button
                         disabled={false}
                         size="sm"
-                        onClick={() => alert("Re-activating")}
+                        onClick={() => {
+                          setIsNewPurchase(false)
+                          setSelectedCourse(course)
+                        }}
                         variant="blue">
                         Reactivate
                       </Button>
@@ -154,8 +157,12 @@ export default function Marketplace({courses}:any) {
       </CourseList>
       { selectedCourse &&
         <OrderModal course={selectedCourse} 
+                    isNewPurchase={isNewPurchase}
                     onSubmit={purchaseCourse}
-                    onClose= {()=> setSelectedCourse(null)} />
+                    onClose={() => {
+                      setSelectedCourse(null)
+                      setIsNewPurchase(true)
+                    }} />
       }
     </>
   )
