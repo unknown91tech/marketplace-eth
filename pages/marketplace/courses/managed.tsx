@@ -37,6 +37,7 @@ export default function ManagedCourses() {
   const { account } = useAdmin({redirectTo: "/marketplace"})
   const [ searchedCourse, setSearchedCourse ] = useState(null)
   const { managedCourses } = useManagedCourses(account)
+  const [ filters, setFilters ] = useState({state: "all"})
   
   const verifyCourse = (email: any, {hash, proof}: { hash: any; proof: any; }) => {
     const emailHash = web3.utils.sha3(email)
@@ -90,59 +91,88 @@ export default function ManagedCourses() {
     setSearchedCourse(null)
   }
 
+  const renderCard = (course: any, isSearched: boolean | undefined) => {
+    return (
+      <ManagedCourseCard
+        key={course.ownedCourseId}
+        isSearched={isSearched}
+        course={course}
+      >
+        <VerificationInput
+          onVerify={(email: any) => {
+            verifyCourse(email, {
+              hash: course.hash,
+              proof: course.proof
+            })
+          }}
+        />
+        { proofedOwnership[course.hash] &&
+          <div className="mt-2">
+            <Message>
+              Verified!
+            </Message>
+          </div>
+        }
+        { proofedOwnership[course.hash] === false &&
+          <div className="mt-2">
+            <Message type="danger">
+              Wrong Proof!
+            </Message>
+          </div>
+        }
+        { course.state === "purchased" &&
+          <div className="mt-2">
+            <Button
+              onClick={() => activateCourse(course.hash)}
+              variant="green">
+              Activate
+            </Button>
+            <Button
+              onClick={() => deactivateCourse(course.hash)}
+              variant="red">
+              Deactivate
+            </Button>
+          </div>
+        }
+      </ManagedCourseCard>
+    )
+  }
+
   if (!account.isAdmin) {
     return null
   }
+
+  const filteredCourses = managedCourses.data
+  ?.filter((course: { state: string; }) => {
+    if (filters.state === "all") {
+      return true
+    }
+
+    return course.state === filters.state
+  })
+  .map((course: any) => renderCard(course) )
+  
   return (
     <>
       <MarketHeader />
       <CourseFilter 
+      filters={filters}onFilterSelect={(value: any) => setFilters({state: value})}
         onSearchSubmit={searchCourse}
       />
       <section className="grid grid-cols-1">
-        { managedCourses.data?.map((course: { ownedCourseId: any; hash: string | number; proof: any; }) =>
-          <ManagedCourseCard
-            key={course.ownedCourseId}
-            course={course}
-          >
-            <VerificationInput
-              onVerify={(email: any) => {
-                verifyCourse(email, {
-                  hash: course.hash,
-                  proof: course.proof
-                })
-              }}
-            />
-            { proofedOwnership[course.hash] &&
-              <div className="mt-2">
-                <Message>
-                  Verified!
-                </Message>
-              </div>
-            }
-            { proofedOwnership[course.hash] === false &&
-              <div className="mt-2">
-                <Message type="danger">
-                  Wrong Proof!
-                </Message>
-              </div>
-            }
-            { course.state === "purchased" &&
-              <div>
-              <Button 
-                onClick={()=> activateCourse(course.hash)}
-              variant="green">
-                Activate
-              </Button>
-              <Button
-                  onClick={() => deactivateCourse(course.hash)}
-                  variant="red">
-                Deactivate
-              </Button>
-            </div>
-            }
-          </ManagedCourseCard>
-        )}
+      { searchedCourse &&
+          <div>
+            <h1 className="text-2xl font-bold p-5">Search</h1>
+            { renderCard(searchedCourse, true) }
+          </div>
+        }
+        <h1 className="text-2xl font-bold p-5">All Courses</h1>
+        { filteredCourses }
+        { filteredCourses?.length === 0 &&
+          <Message type="warning">
+            No courses to display
+          </Message>
+        }
       </section>
     </>
   )
