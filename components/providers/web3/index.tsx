@@ -5,6 +5,10 @@ import Web3 from "web3";
 import { setupHooks } from "./hooks/setupHooks";
 const Web3Context = createContext(null)
 
+const setListeners = (provider:any) => {
+  provider.on("chainChanged", (_: any) => window.location.reload())
+}
+
 const createWeb3State = ({web3, provider, contract, isLoading}:any) => {
   return {
     web3,
@@ -23,6 +27,8 @@ export default function Web3Provider({children}:any) {
       if (provider) {
         const web3= new Web3(provider)
         const contract = await loadContract("CourseMarketplace", web3)
+        setListeners(provider)
+
         setWeb3Api(createWeb3State({web3, provider , contract , isLoading: false}))
       } else {
         setWeb3Api((api:any) => ({...api, isLoading: false}))

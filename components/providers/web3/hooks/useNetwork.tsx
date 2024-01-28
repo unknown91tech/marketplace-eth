@@ -16,8 +16,8 @@ const NETWORKS:any = {
   }
 
   const targetNetwork = NETWORKS[process.env.NEXT_PUBLIC_TARGET_CHAIN_ID]
-export const handler = (web3:any , provider:any) => () => {
-    const {data , mutate, ...rest}=useSWR(() => 
+export const handler = (web3:any ) => () => {
+    const {data ,  ...rest}=useSWR(() => 
         web3? "web3/network": null,
         async() => {
             const chainId =await web3.eth.getChainId()
@@ -28,19 +28,8 @@ export const handler = (web3:any , provider:any) => () => {
         }
     )
 
-    useEffect(() => {
-    const mutator = (chainId: string) => window.location.reload()
-    provider?.on("chainChanged", mutator)
 
-    return () => {
-      provider?.removeListener("chainChanged", mutator)
-    }
-  }, [provider])
-
-    return {
-        
-            mutate,
-            
+    return {  
             data,
             target: targetNetwork,
             isSupported:data===targetNetwork,
