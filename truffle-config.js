@@ -25,7 +25,7 @@ module.exports = {
       provider: () =>
         new HDWalletProvider({
           mnemonic: {
-            phrase: ""
+            phrase: keys.MNEMONIC
           },
           providerOrUrl: `wss://sepolia.infura.io/ws/v3/${keys.INFURA_PROJECT_ID}`,
           addressIndex: 0
