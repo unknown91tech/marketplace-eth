@@ -31,10 +31,10 @@ module.exports = {
           addressIndex: 0
         }),
       network_id: "11155111",
-      gasPrice: 2500000000,
+      gasPrice: 100000000000,
       networkCheckoutTimeout: 10000,
       timeoutBlocks: 200
-    }
+    }// 100000000000
     
   },
 

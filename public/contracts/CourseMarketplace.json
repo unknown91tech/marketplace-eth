@@ -11461,10 +11461,16 @@
       "links": {},
       "address": "0xD2D39b2bF4eD736DBCF7903D6ebc7828F83AE563",
       "transactionHash": "0xaf10abdfb8779e130afac120ffa03fc6520013bcfa7373c5ef7afca736fa56ec"
+    },
+    "11155111": {
+      "events": {},
+      "links": {},
+      "address": "0x8f414E822BF51e7747d8cbA5df71Ba4CEF613dc6",
+      "transactionHash": "0xa070289ec0e221f1888734f89191669ff05517eb261266e00957e03ce472fc5c"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-01-28T17:13:34.216Z",
+  "updatedAt": "2024-01-29T17:07:13.203Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
