@@ -1,222 +1,214 @@
-/* eslint-disable react/no-unescaped-entities */
-
 import { CourseCard, CourseList } from "@components/ui/course"
 import { BaseLayout } from "@components/ui/layout"
 import { getAllCourses } from "@/components/ui/content/courses/fetcher"
-import {  useOwnedCourses, useWalletInfo } from "@/components/hooks/web3"
-import {  Button, Loader, Message } from "@/components/ui/common"
-import { OrderModal } from "@/components/ui/order"
-import { useState } from "react"
-import { MarketHeader } from "@/components/ui/marketplace"
-import { useWeb3 } from "@/components/providers"
-import { toast } from 'react-toastify'
+import { useOwnedCourses, useWalletInfo } from "@components/hooks/web3"
+import { Button, Loader, Message } from "@components/ui/common"
+import { OrderModal } from "@components/ui/order"
+import {  useState } from "react"
+import { MarketHeader } from "@components/ui/marketplace"
+import { useWeb3 } from "@components/providers"
+import { withToast } from "@utils/toast"
 
 
 export default function Marketplace({courses}:any) {
+  const { web3, contract, requireInstall } = useWeb3()
+  const { hasConnectedWallet, isConnecting, account } = useWalletInfo()
+  const { ownedCourses } = useOwnedCourses(courses, account.data)
 
-  const {web3, contract, requireInstall} =useWeb3()
-  const [selectedCourse , setSelectedCourse] = useState(null)
-  const {hasConnectedWallet, isConnecting , account}:any = useWalletInfo()
-  const {ownedCourses} = useOwnedCourses(courses , account.data)
+  const [selectedCourse, setSelectedCourse] = useState(null)
+  const [busyCourseId, setBusyCourseId] = useState(null)
   const [isNewPurchase, setIsNewPurchase] = useState(true)
 
-
-  const purchaseCourse =async (order: any) => {
-    const hexCourseId = web3.utils.utf8ToHex(selectedCourse.id)
-
+  const purchaseCourse = async (order: { price: any; email: any }, course: any) => {
+    const hexCourseId = web3.utils.utf8ToHex(course.id)
     const orderHash = web3.utils.soliditySha3(
-      {type:"bytes16" , value: hexCourseId},
-      {type:"address" , value: account.data}
+      { type: "bytes16", value: hexCourseId },
+      { type: "address", value: account.data }
     )
 
-    
-
     const value = web3.utils.toWei(String(order.price))
+
+    setBusyCourseId(course.id)
     if (isNewPurchase) {
       const emailHash = web3.utils.sha3(order.email)
       const proof = web3.utils.soliditySha3(
         { type: "bytes32", value: emailHash },
         { type: "bytes32", value: orderHash }
       )
-
-      _purchaseCourse(hexCourseId, proof, value)
+      withToast(_purchaseCourse({hexCourseId, proof, value}, course))
     } else {
-      _repurchaseCourse(orderHash, value)
+      withToast(_repurchaseCourse({courseHash: orderHash, value}, course))
     }
   }
-
-  const _purchaseCourse = async (hexCourseId: any, proof: any, value: any) => {
-    try{
-     const result= await contract.methods.purchaseCourse(
+  const _purchaseCourse = async ({hexCourseId, proof, value}: any, course: any) => {
+    try {
+      const result = await contract.methods.purchaseCourse(
         hexCourseId,
         proof
       ).send({from: account.data, value})
 
-      console.log( result)
+      ownedCourses.mutate([
+        ...ownedCourses.data, {
+          ...course,
+          proof,
+          state: "purchased",
+          owner: account.data,
+          price: value
+        }
+      ])
+      return result
+    } catch(error) {
+      throw new Error(error.message)
+    } finally {
+      setBusyCourseId(null)
     }
-    catch{
-      console.log("Purchase Course: Opertaion falied!!")
-    }
-
-
-
-    //courseHash + emailHash
   }
 
-  const _repurchaseCourse = async (courseHash: any, value: any) => {
+  const _repurchaseCourse = async ({courseHash, value}:any, course:any) => {
     try {
       const result = await contract.methods.repurchaseCourse(
         courseHash
       ).send({from: account.data, value})
-      console.log(result)
-    } catch {
-      console.error("Purchase course: Operation has failed.")
+      const index = ownedCourses.data.findIndex(c => c.id === course.id)
+
+      if (index >= 0) {
+        ownedCourses.data[index].state = "purchased"
+        ownedCourses.mutate(ownedCourses.data)
+      } else {
+        ownedCourses.mutate()
+
+      }
+      return result
+    } catch(error) {
+      throw new Error(error.message)
+    } finally {
+      setBusyCourseId(null)
     }
   }
 
-  const notify = () => {
-    //const resolveWithSomeData = new Promise(resolve => setTimeout(() => resolve("world"), 3000));
-    const resolveWithSomeData = new Promise(
-     (resolve, reject) => setTimeout(() => reject(new Error("Some Error")), 3000))
-    toast.promise(
-        resolveWithSomeData,
-        {
-          pending: {
-            render(){
-              return "I'm loading"
-            },
-            icon: <Loader size="sm"/>,
-          },
-          success: {
-            render({data}){
-              return `Hello ${data}`
-            },
-            // other options
-            icon: "🟢",
-          },
-          error: {
-            render({data}){
-              // When the promise reject, data will contains the error
-              return <div>{data.message ?? "Transaction has failed"}</div>
-            }
-          }
-        }
-    )
+  const cleanupModal = () => {
+    setSelectedCourse(null)
+    setIsNewPurchase(true)
   }
-
- 
 
   return (
     <>
-     
-       <MarketHeader/>
-       <Button onClick={notify}>
-        Notify!
-      </Button>
+      <MarketHeader />
       <CourseList
         courses={courses}
       >
-      {(course: any) =>
-      {
+      {(course: any) => {
         const owned = ownedCourses.lookup[course.id]
-        return(
+        return (
           <CourseCard
             key={course.id}
             course={course}
             state={owned?.state}
             disabled={!hasConnectedWallet}
-            Footer={() =>
-              {
-                if(requireInstall){
-                  return (
-                    // <div className="mt-4">
-                      <Button variant="lightPurple" 
-                              disabled={true}
-                              size="sm"
-                              >
-                        Install
-                      </Button>
-                    // </div>
-                  )
-                }
+            Footer={() => {
+              if (requireInstall) {
+                return (
+                  <Button
+                    size="sm"
+                    disabled={true}
+                    variant="lightPurple">
+                    Install
+                  </Button>
+                )
+              }
+              if (isConnecting) {
+                return (
+                  <Button
+                    size="sm"
+                    disabled={true}
+                    variant="lightPurple">
+                    <Loader size="sm" />
+                  </Button>
+                )
+              }
 
-                if(isConnecting){
-                  return (
-                    // <div className="mt-4">
-                      <Button variant="lightPurple" 
-                              disabled={true}
-                              size="sm"
-                              >
-                        <Loader size="sm"/>
-                      </Button>
-                    // </div>
-                  )
-                }
+              if (!ownedCourses.hasInitialResponse) {
+                return (
+                  // <div style={{height: "42px"}}></div>
+                  <Button
+                    variant="white"
+                    disabled={true}
+                    size="sm">
+                    { hasConnectedWallet ?
+                      "Loading State..." :
+                      "Connect"
+                    }
+                  </Button>
+                )
+              }
 
-                if(!ownedCourses.hasInitialResponse){
-                  return (
-                    <div style={{height: "42px"}}></div>
-                  )
-                }
-
-                
-
-                if(owned) {
-                  return (
-                    <>
+              const isBusy = busyCourseId === course.id
+              // const isBusy = true
+              if (owned) {
+                return (
+                  <>
                     <div className="flex">
                       <Button
-                        
-                        size="sm"
-                        variant="green">
-                        Owned <span > &#10003;</span> 
-                      </Button>
-                      {
-                        owned.state ==="deactivated" &&
-                        <Button
+                        onClick={() => alert("You are owner of this course.")}
                         disabled={false}
                         size="sm"
-                        onClick={() => {
-                          setIsNewPurchase(false)
-                          setSelectedCourse(course)
-                        }}
-                        variant="blue">
-                        Reactivate
+                        variant="green">
+                        Owned &#10003;
                       </Button>
+                      { owned.state === "deactivated" &&
+                        <div className="ml-1">
+                          <Button
+                            size="sm"
+                            disabled={isBusy}
+                            onClick={() => {
+                              setIsNewPurchase(false)
+                              setSelectedCourse(course)
+                            }}
+                            variant="blue">
+                            { isBusy ?
+                              <div className="flex">
+                                <Loader size="sm" />
+                                <div className="ml-2">In Progress</div>
+                              </div> :
+                              <div>Reactivate</div>
+                            }
+                          </Button>
+                        </div>
                       }
                     </div>
                   </>
                 )
               }
-
-
               return (
-                // <div className="mt-4">
-                  <Button variant="lightPurple" 
-                          disabled={!hasConnectedWallet}
-                          size="sm"
-                          onClick= {() => setSelectedCourse(course)}
-                          >
-                    Purchase
-                  </Button>
-                // </div>
-              )
+                <Button
+                  onClick={() => setSelectedCourse(course)}
+                  size="sm"
+                  disabled={!hasConnectedWallet || isBusy}
+                  variant="lightPurple">
+                  { isBusy ?
+                   <div className="flex">
+                      <Loader size="sm" />
+                      <div className="ml-2">In Progress</div>
+                   </div> :
+                  <div>Purchase</div>
+                  }
+                </Button>
+              )}
             }
-            
-          }
-        />
-        )
-      }
+          />
+        )}
       }
       </CourseList>
       { selectedCourse &&
-        <OrderModal course={selectedCourse} 
-                    isNewPurchase={isNewPurchase}
-                    onSubmit={purchaseCourse}
-                    onClose={() => {
-                      setSelectedCourse(null)
-                      setIsNewPurchase(true)
-                    }} />
+        <OrderModal
+          course={selectedCourse}
+          isNewPurchase={isNewPurchase}
+          onSubmit={(formData: any, course: any) => {
+            purchaseCourse(formData, course)
+            cleanupModal()
+          }}
+          onClose={cleanupModal}
+        />
       }
     </>
   )

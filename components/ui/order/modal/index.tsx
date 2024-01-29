@@ -177,7 +177,7 @@ export default function OrderModal({course, onClose, onSubmit, isNewPurchase}:an
           variant="green"
             disabled={formState.isDisabled}
             onClick={() => {
-              onSubmit(order)
+              onSubmit(order, course)
           }}>
             Submit
           </Button>
