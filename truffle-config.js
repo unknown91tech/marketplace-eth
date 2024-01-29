@@ -1,5 +1,6 @@
 
 const HDWalletProvider = require("@truffle/hdwallet-provider")
+const keys= require("./keys.json")
 
 module.exports = {
   /**
@@ -26,7 +27,7 @@ module.exports = {
           mnemonic: {
             phrase: ""
           },
-          providerOrUrl: "wss://sepolia.infura.io/ws/v3/YOUR-PROJECT-ID",
+          providerOrUrl: `wss://sepolia.infura.io/ws/v3/${keys.INFURA_PROJECT_ID}`,
           addressIndex: 0
         }),
       network_id: "11155111",
