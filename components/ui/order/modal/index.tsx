@@ -12,7 +12,7 @@ const defaultOrder = {
 
 const _createFormState = (isDisabled = false, message =  "") => ({isDisabled, message})
 
-const createFormState = ({price, email, confirmationEmail, isNewPurchase}:any, hasAgreedTOS:any) => {
+const createFormState = ({price, email, confirmationEmail}:any, hasAgreedTOS:any, isNewPurchase: any) => {
   if (!price || Number(price) <= 0) {
     return _createFormState(true, "Price is not valid.")
   }
@@ -96,7 +96,7 @@ export default function OrderModal({course, onClose, onSubmit, isNewPurchase}:an
                   disabled={!enablePrice}
                   value={order.price}
                   onChange={({target: {value}}) => {
-                    if (isNaN(value)) { return; }
+                    if (isNaN(parseInt(value))) { return; }
                     setOrder({
                       ...order,
                       price: value

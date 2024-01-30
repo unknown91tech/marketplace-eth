@@ -33,7 +33,7 @@ const VerificationInput = ({onVerify}:any) => {
 }
 
 export default function ManagedCourses() {
-  const [ proofedOwnership, setProofedOwnership ] = useState({})
+  const [ proofedOwnership, setProofedOwnership ] = useState<any>({})
   const { web3, contract } = useWeb3()
   const { account } = useAdmin({redirectTo: "/marketplace"})
   const [ searchedCourse, setSearchedCourse ] = useState(null)
@@ -67,7 +67,7 @@ export default function ManagedCourses() {
       const result = await contract.methods[method](courseHash).send({from: account.data})
       return result
     }
-    catch(e) {
+    catch(e:any) {
       throw new Error(e.message)
     }
   }
@@ -156,7 +156,7 @@ export default function ManagedCourses() {
 
     return course.state === filters.state
   })
-  .map((course: any) => renderCard(course) )
+  .map((course: any) => renderCard(course, false) )
   
   return (
     <>

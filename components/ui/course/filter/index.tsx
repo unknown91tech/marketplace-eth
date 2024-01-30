@@ -23,9 +23,10 @@ export default function CourseFilter({onSearchSubmit, onFilterSelect}:any) {
         </Button>
       </div>
       <div className="relative text-gray-700">
+      {/* placeholder="Regular input" */}
       <select
           onChange={({target: {value}}) => onFilterSelect(value)}
-          className="w-72 h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" placeholder="Regular input">
+          className="w-72 h-10 pl-3 pr-6 text-base placeholder-gray-600 border rounded-lg appearance-none focus:shadow-outline" >
           { OPTIONS.map(option =>
             <option
               key={option}
