@@ -15,7 +15,7 @@ const NETWORKS:any = {
     11155111: "Sepolia Test Network",
   }
 
-  const targetNetwork = NETWORKS[process.env.NEXT_PUBLIC_TARGET_CHAIN_ID]
+  const targetNetwork = NETWORKS[process.env.NEXT_PUBLIC_TARGET_CHAIN_ID as string]
 export const handler = (web3:any ) => () => {
     const {data ,  ...rest}=useSWR(() => 
         web3? "web3/network": null,
