@@ -8,7 +8,6 @@ const adminAddresses: any= {
 }
 
 export const handler = (web3:any , provider:any) => () => {
-
   const { data, mutate, ...rest } = useSWR(() =>
     web3 ? "web3/accounts" : null,
     async () => {
