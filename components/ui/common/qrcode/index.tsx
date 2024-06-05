@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useAccount, useOwnedCourse, useOwnedCourses } from "@/components/hooks/web3";
 
 import { useState } from "react";
@@ -66,3 +67,25 @@ export default function QrCode({children ,course}:any) {
     </>
   );
 }
+=======
+import { useAccount } from "@/components/hooks/web3";
+
+import { useState } from "react";
+import { Button } from "..";
+import QRCode from "qrcode";
+import Image from "next/image";
+export default function QrCode() {
+  const { account } = useAccount();
+  const [src, setsrc] = useState<string>("");
+  const generate = () => {
+    console.log(account)
+    QRCode.toDataURL(`${account.data}`).then(setsrc);
+  };
+  return (
+    <>
+      <Image src={src} alt="" width={30} height={30} />
+      <Button onClick={generate}>Generate QR</Button>
+    </>
+  );
+}
+>>>>>>> 04daf3699f0af53643de07eb60763e0186a0e85a
