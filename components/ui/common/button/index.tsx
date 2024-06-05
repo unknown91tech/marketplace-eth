@@ -1,3 +1,4 @@
+import {Button, ButtonGroup} from "@nextui-org/button";
 
 const SIZE:any = {
     sm: "p-3 text-base xs:px-8",
@@ -6,7 +7,7 @@ const SIZE:any = {
   }
 
 
-export default function Button({
+export default function Buttons({
     children,
      className,
      size = "md",
@@ -25,11 +26,11 @@ export default function Button({
             lightPurple: `text-indigo-700 bg-indigo-100 ${hoverable &&"hover:bg-indigo-200 hover:transition-transform duration-200 border-0"}`
         }
     return (
-        <button 
+        <Button 
             {...rest}
             
             className={`${sizeClass} disabled:opacity-50 disabled:cursor-not-allowed border rounded-md font-medium ${className} ${variants[variant]}`}>
             {children}
-        </button>
+        </Button>
     )
 }

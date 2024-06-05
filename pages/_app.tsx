@@ -1,9 +1,8 @@
 
 import { ToastContainer } from 'react-toastify'
 
-import 'react-toastify/dist/ReactToastify.css'
 import '@styles/globals.css'
-import type { AppProps } from 'next/app'
+import {NextUIProvider} from '@nextui-org/react'
 
 
 const Noop = ({children}:any) => <>{children}</>
@@ -11,9 +10,11 @@ export default function App({ Component, pageProps }:any) {
   const Layout = Component.Layout ?? Noop
 
   return (
-    <Layout>
-      <ToastContainer/>
+    <NextUIProvider>
+      <Layout>
+      
       <Component {...pageProps} />
-    </Layout>
+      </Layout>
+    </NextUIProvider>
   )
 }

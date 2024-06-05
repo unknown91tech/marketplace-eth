@@ -1,10 +1,18 @@
+import { useAccount } from "@/components/hooks/web3";
 import Image from "next/image"
 const STATE_COLORS:any = {
   purchased: "indigo",
   activated: "green",
   deactivated: "red"
 }
+
+export let qrinfo=[];
 export default function OwnedCourseCard({children, course}:any) {
+  const { account } = useAccount();
+  qrinfo[0] = course.id ;
+  qrinfo[1] = course.proof;
+  qrinfo[2]=course.owned;
+  // console.log(qrinfo)
   const stateColor = STATE_COLORS[course.state]
 
   return (

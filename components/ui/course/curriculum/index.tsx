@@ -76,8 +76,8 @@ const lectures = [
                               {
                                 courseState === "purchased" && 
                                 <Link href="/faq" legacyBehavior>
-                                <a className="text-yellow-500 hover:text-yellow-900">
-                                  Waiting for activation...
+                                <a className="text-green-500 hover:text-green-900">
+                                  Start the  Course
                                 </a>
                                 </Link>
                               }

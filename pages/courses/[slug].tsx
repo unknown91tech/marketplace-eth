@@ -62,7 +62,7 @@ export default function Course({course}:any) {
         locked={isLocked}
         courseState={courseState}
       />
-      <Modal />
+      {/* <Modal /> */}
     </>
   )
 }

@@ -18,7 +18,8 @@ import { useWeb3 } from "@/components/providers";
 
     return (
         <>
-        <MarketHeader/>
+        
+        <MarketHeader />
 
         <section className="grid grid-cols-1 max-h-max ">
         { ownedCourses.isEmpty &&

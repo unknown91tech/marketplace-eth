@@ -18,6 +18,8 @@ const LINKS = [{
 
 export default function Header() {
   const { account } = useAccount()
+  const isAdmin = account.isAdmin;
+  const isManufacturer =account.isManufacturer;
   return (
     <>
       <div className="pt-4">
@@ -25,10 +27,17 @@ export default function Header() {
       </div>
       <EthRates />
       <div className="flex flex-row-reverse p-4 sm:px-6 lg:px-8">
-      <Breadcrumbs
-          isAdmin={account.isAdmin}
-          items={LINKS}
-        />
+        {
+          !isAdmin && !isManufacturer &&
+          <Breadcrumbs
+            isAdmin={account.isAdmin}
+            items={LINKS} />
+            
+        }
+        <div className=" mb-24">
+
+          </div>
+      
       </div>
     </>
   )

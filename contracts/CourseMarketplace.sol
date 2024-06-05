@@ -141,6 +141,7 @@ contract CourseMarketplace {
 
    function activateCourse(bytes32 courseHash)
     external
+    payable
     onlyOwner
     onlyWhenNotStopped
   {
@@ -154,10 +155,12 @@ contract CourseMarketplace {
       revert InvalidState();
     }
     course.state = State.Activated;
+    course.price = msg.value;
   }
 
   function deactivateCourse(bytes32 courseHash)
     external
+    payable
     onlyOwner
     onlyWhenNotStopped
   {
@@ -175,7 +178,7 @@ contract CourseMarketplace {
     require(success, "Transfer failed!");
 
     course.state = State.Deactivated;
-    course.price = 0;
+    course.price = msg.value;
   }
 
   function transferOwnership(address newOwner)
