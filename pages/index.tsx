@@ -1,11 +1,7 @@
 
-<<<<<<< HEAD
-import { Hero , QrCode , Message} from "@components/ui/common"
-import { CourseCard, CourseHero, CourseList, ManagedCourseCard  } from "@components/ui/course"
-=======
+// =======
 import { Hero, QrCode } from "@components/ui/common"
 import { CourseCard, CourseList } from "@components/ui/course"
->>>>>>> 04daf3699f0af53643de07eb60763e0186a0e85a
 import { BaseLayout } from "@components/ui/layout"
 import { getAllCourses } from "@/components/ui/content/courses/fetcher"
 import { useAccount, useOwnedCourse } from "@/components/hooks/web3"
@@ -30,7 +26,6 @@ export default function Home({courses}:any) {
 
   return (
     <>
-<<<<<<< HEAD
     
     {
       isAdmin ? 
@@ -40,11 +35,10 @@ export default function Home({courses}:any) {
           Hello Admin
         </h1>
       </div>
-=======
       
       <Hero />
       <QrCode />
->>>>>>> 04daf3699f0af53643de07eb60763e0186a0e85a
+{/* >>>>>>> 04daf3699f0af53643de07eb60763e0186a0e85a */}
       <CourseList
           courses={courses}
         >
@@ -114,12 +108,6 @@ export default function Home({courses}:any) {
         
 
    }
-
-    
-      
-      
-      
-      
 
     </>
   )
